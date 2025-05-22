@@ -89,7 +89,7 @@ export default function ForgotPassword() {
                 <path d="M8 12L11 15L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="text-2xl font-bold">flomo</span>
+            <span className="text-2xl font-bold">echoapp</span>
           </div>
         </div>
 

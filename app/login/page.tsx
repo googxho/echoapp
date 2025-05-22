@@ -21,11 +21,10 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // 处理登录逻辑
-    console.log('登录信息:', { phoneOrEmail, password });
-    // 跳转首页
-    // window.location.href = '/';
-    // 使用nextjs 的路由跳转
+    // 模拟登录成功
+    const fakeToken = '123456';
+    document.cookie = `token=${fakeToken}; path=/; max-age=${7 * 24 * 60 * 60}`; // 设置7天有效期
+    
     router.replace('/mine');
   };
 
@@ -40,7 +39,7 @@ export default function Login() {
                 <path d="M8 12L11 15L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="text-2xl font-bold">flomo</span>
+            <span className="text-2xl font-bold">echoapp</span>
           </div>
         </div>
 

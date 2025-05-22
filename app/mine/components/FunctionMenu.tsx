@@ -1,0 +1,85 @@
+"use client"
+
+import { Tags } from "@/app/indexdb/EchoDataTypes";
+
+// 定义侧边栏菜单项类型
+type SidebarMenuItem = {
+  label: string;
+  icon: React.ReactNode;
+  onClick?: () => void;
+};
+
+// 定义功能菜单数据
+const functionMenuItems: SidebarMenuItem[] = [
+  {
+    label: '便捷输入',
+    icon: (
+      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+    )
+  },
+  {
+    label: '每日回顾',
+    icon: (
+      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    )
+  },
+  {
+    label: '快一找',
+    icon: (
+      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )
+  },
+  {
+    label: '我的进步',
+    icon: (
+      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    )
+  }
+];
+
+// 定义侧边栏菜单项组件
+const SidebarMenuItem = ({ item }: { item: SidebarMenuItem }) => (
+  <div
+    className="flex items-center p-2 text-gray-700 rounded-md hover:bg-gray-100"
+    onClick={item.onClick}
+  >
+    {item.icon}
+    <span>{item.label}</span>
+  </div>
+);
+
+export default function FunctionMenu({ tags }: { tags: Tags }) {
+  return (
+    <div className="flex-grow p-2">
+      <button className="flex items-center w-full p-2 mb-2 text-white bg-green-500 rounded-md">
+        <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        全部笔记
+      </button>
+
+      <div className="space-y-1 mt-4">
+        {functionMenuItems.map((item, index) => (
+          <SidebarMenuItem key={index} item={item} />
+        ))}
+      </div>
+
+      <div className="mt-6 space-y-1">
+        <div className="text-xs font-medium text-gray-500 px-2 py-1">全部笔记</div>
+        {tags.map((item, index) => (
+          <div key={index} className="flex items-center p-2 text-gray-700 rounded-md hover:bg-gray-100">
+            <span>{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

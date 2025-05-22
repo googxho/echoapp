@@ -39,3 +39,12 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+/* 自定义 Tailwind 类名 */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
