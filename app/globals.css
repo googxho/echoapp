@@ -3,6 +3,164 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-background-color: #fafafa;
+  --memo-hover-background-color: #dddddd;
+  --card-background-color: #f8f8f8;
+  --active-background-color: #efefef;
+  --editor-menu-bar-bg: #ffffff;
+  --focused-shadow-bg: #dddddd;
+  --blurd-border-color: #e8e8e8;
+  --disabledBg: rgba(0, 0, 0, 0.3);
+  --textColor: #413e3b;
+  --svgFill: rgba(171, 171, 174);
+  --heatgrid-day-bg: #efefef;
+  --heatgrid-day-color: #d3ecdd;
+  --heatgrid-day-light_green-bg: #d3ecdd;
+  --heatgrid-day-green-bg: #8ddeb5;
+  --heatgrid-day-dark_green-bg: #55bb8e;
+  --blurd-shadow-color: rgba(232, 232, 232, 0.2);
+  --pro-bg: #ffffff;
+  --block-h3-color: #202020;
+  --block-p-color: #202020;
+  --p-task-color: #000;
+  --proIcon: #212f4b;
+  --proPath: #fff;
+  --defaultBg: #fff;
+  --shareStatBg: #f8f8f8;
+  --shareText: rgba(29, 28, 33, 1);
+  --shareFooterLogo: #1d1c21;
+  --exModalBg: #f8f8f8;
+  --scrollbarThumb: rgba(0, 0, 0, 0.3);
+  --iconHover: #000000;
+  --bgWhite: #fff;
+  --textBlack: #454545;
+  --textSecondary: #212f4b;
+  --textGray: #9d9d9d;
+  --bgSecondWhite: #fcfcfc;
+  --hoverWhiteGray: #fafafa;
+  --bodyBg: #fafafa;
+  --grayLight: #efefef;
+  --borderGray: #dbdbdb;
+  --descText: #9d9d9d;
+  --BgDownloadPrompt: #fefefe;
+  --underline: #323232;
+  --BgTestAnnouncement: #efefef;
+  --divider: #dbdbdb;
+  --popupColor: #454545;
+  --descColor: #9d9d9d;
+  --titleColor: rgb(33, 47, 75);
+  --tagHoverBg: lightgrey;
+  --bgGreen: #30cf79;
+  --monthPlanBorder: #30cf79;
+  --mothPlanHoverBg: #f4fffa;
+  --yearPlanHoverBg: #2bba6d;
+  --memberPlanColor: #fff;
+  --svgActiveColor: #9d9d9d;
+  --svgDisableColor: #d3d3d3;
+  --hoverBg: rgba(0, 0, 0, 0.05);
+  --splitLineBg: lightgrey;
+  --tagHoverBg: rgba(55, 53, 47, 0.08);
+  --themeGreen: #55bb8e;
+  --glassBg: rgba(255, 255, 255, 0.8);
+  --sideLiColor: #55bb8e;
+  --elImageBorder: #e6e6e6;
+  --elImageBg: #fff;
+  --expandHoverBg: #efefef;
+  --green: #30cf79;
+  --saveSvgPathColor: #ffffff;
+  --greenLight: #f4fffa;
+  --tagMoreActionHoverBg: rgba(0, 0, 0, 0.2);
+  --elInputInnerBg: #efefef;
+  --tagBg: #eef3fe;
+  --tagColor: #5783f7;
+  --editTagColor: rgba(87, 131, 247, 0.75);
+  --memoContentColor: #323232;
+  --editorActiveColor: #000000;
+  --memoShareCardBg: #efefef;
+  --light-color: #fafafa;
+  --defaultBorder: #dcdfe6;
+  --n-s-tips-bg: #efefef;
+  --wx-review-item-border: #efefef;
+  --cancel-bg: #fff;
+  --cancel-border: rgba(0, 0, 0, 0.1);
+  --review-btn-hover-bg: #f4fffa;
+  --gray-dark: rgba(69, 69, 69, 1);
+  --review-filter: rgba(255, 255, 255, 0.75);
+  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, #ffffff 100%);
+  --fold-after: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, #ffffff 100%);
+  --mark-bg: #ffffb4;
+  --blockquote-bg: #efefef;
+  --bubble-menu-bg: rgba(250, 250, 250, 0.5);
+  --editorColor: #efefef;
+  --popover-head-desc: #9d9d9d;
+  --divider-bg: #dcdfe6;
+  --fuzzy-border: #d9d9d9;
+  --svg-disable-color: #d3d3d3;
+  --glass-inner-border: #fff;
+  --focus-disabled: #cecece;
+  --noticeBg: #ffffff;
+  --mailColor: rgba(0, 0, 0, 0.05);
+  --guide-pro-title-color: #30cf79;
+  --guide-pro-desc-color: #454545;
+  --disabled-bg: rgba(239, 239, 239, 1);
+  --bigShadow: rgba(61, 30, 30, 0.2);
+  --settingHoverBg: #9d9d9d;
+  --popoverShadow: rgba(0, 0, 0, 0.2);
+  --reviewSettingBg: #efefef;
+  --rateColor: rgba(228, 117, 113, 1);
+  --logoColor: #15191c;
+  --verticalLine: rgba(0, 0, 0, 0.05);
+  --onboardingTipBg: #589ef8;
+  --onboardingTipColor: #fff;
+  --circleCloseBg: #efefef;
+  --heatgridTipBg: #efefef;
+  --payFeedbackColor: #454545;
+  --loginBtnBorder: rgba(0, 0, 0, 0.1);
+  --loginWxBg: #ffffff;
+  --loginInputBg: #ffffff;
+  --noticeListItemBg: #fafafa;
+  --lockscreenInputBg: #ffffff;
+  --dark-box-bg: #fff;
+  --dark-box-border: #e2e2e2;
+  --cancel-btn-bg: #fff;
+  --cancel-btn-hover-bg: rgba(0, 0, 0, 0.05);
+  --card-p-color: #000000;
+  --share-style-active: #d9d9d9;
+  --recommend-memo-bg: #fffff9;
+  --recommend-memo-bg-after: linear-gradient(180deg, rgba(41, 41, 41, 0), #fffff9);
+  --trayLogoText: #202020;
+  --appLogoBorder: #000000;
+  --tagCountColor: #b9b9b9;
+  --textGrayBlack: #9d9d9d;
+  --commentItemBg: #f9f9f9;
+  --membership-banner-footer-bg: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  --highlight: #dcd1ba;
+  --botmsgbg: #f9f9f9;
+  --chatScrollbar: #efefef;
+  --referenceContentBg: #ffffff;
+  --referenceContentShadow: rgba(0, 0, 0, 0.05);
+  --usermsgbg: #f4fffa;
+  --chatbg: #fff;
+  --referenceIndexBg: #dddddd;
+  --referenceIndexColor: #323232;
+  --historyMsgHoverBg: #efefef;
+  --wenwenInputBg: #fcfcfc;
+  --wenwenInputHover: #d3d3d3;
+  --wenwenInputIconColor: #9d9d9d;
+  --betaColor: #9d9d9d;
+  --endSvgFill: rgba(0, 0, 0, 0.05);
+  --shortcuts-bg: #ffffff;
+  --empty-day: #e8e8e8;
+  --dark-green: #55bb8e;
+  --light-green: #d3ecdd;
+  --share-green: #53b88b;
+  --siderColor: #323232;
+  --activeDayBg: #20824d;
+  --tagMemoButton: #ffffff;
+  --tagMemoFooter: linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, rgba(250, 250, 250, 0.9) 20%);
+  --tagMemoStep: #efefef;
+  --tagMemoButtonColor: #323232;
+  --whiteGray: #f9f9f9;
 }
 
 @theme inline {
@@ -22,7 +180,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Barlow, "PingFang SC", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -44,12 +202,30 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 /* 编辑器默认聚焦样式清除 */
 .ProseMirror:focus {
   outline: none;
   box-shadow: none;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
+  font-size: 14px;
+}
+
+strong {
+  font-weight: bolder;
 }

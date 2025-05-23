@@ -1,6 +1,6 @@
 export default function TopInfoArea() {
   return (
-    <div className="p-4 border-b border-gray-200">
+    <div className="p-4 ">
       <div className="flex items-center space-x-2">
         <div className="text-xl font-medium">googxh</div>
         <div className="text-xs text-gray-500">PRO</div>

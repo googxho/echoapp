@@ -9,8 +9,8 @@ const Editor = dynamic(() => import('@/app/components/Editor'), {
 export default function NoteHeader() {
 
   return (
-    <div className="m-4 border-none">
-      <div className="flex items-center">
+    <div className="border-none">
+      <div className="flex items-center m-2">
         <div className="flex-grow">
           <input
             type="text"
@@ -19,8 +19,8 @@ export default function NoteHeader() {
           />
         </div>
       </div>
-      <div className="">
-      <Editor />
+      <div className="m-2">
+        <Editor />
       </div>
     </div>
   );

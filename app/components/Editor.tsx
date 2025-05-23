@@ -76,11 +76,10 @@ export default function Editor() {
           <button
             title="图片"
             onClick={() =>
-              editor?.chain().focus().setImage({ src: 'https://via.placeholder.com/150' }).run()
+              editor?.chain().focus().setImage({ src: '/window.svg' }).run()
             }
-          >
-            🖼
-          </button>
+          >Q
+            </button>
           <button
             title="一级标题"
             onClick={() =>

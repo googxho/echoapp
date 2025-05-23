@@ -1,6 +1,6 @@
 export default function ActivityCalendar() {
   return (
-    <div className="p-4 border-b border-gray-200">
+    <div className="p-4">
       <div className="grid grid-cols-7 gap-1">
         {Array(35).fill(0).map((_, i) => (
           <div 
