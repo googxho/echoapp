@@ -18,7 +18,7 @@ import NoteHeader from './components/NoteHeader';
 import { getDataFromDB, initDB } from '../indexdb/indexedDBManager';
 import { MemoItem, Tags } from '../indexdb/EchoDataTypes';
 import echodata from '../indexdb/echo_data.json'
-import MemoItemView from './components/NoteItem';
+import MemoItemView from './components/MemoItem';
 
 export default function HomePage() {
 

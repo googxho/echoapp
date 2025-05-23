@@ -48,3 +48,8 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+/* 编辑器默认聚焦样式清除 */
+.ProseMirror:focus {
+  outline: none;
+  box-shadow: none;
+}

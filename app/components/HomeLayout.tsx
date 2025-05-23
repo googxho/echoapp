@@ -68,7 +68,7 @@ export default function HomeLayout({ leftSidebar, noteHeader, noteList }: HomeLa
   }, [isDragging]);
 
   return (
-    <div className="flex justify-center h-screen overflow-hidden">
+    <div className="flex justify-center h-screen overflow-hidden bg-[#fafafa]">
       <div 
         ref={containerRef}
         className={`flex h-full ${isDragging ? 'dragging' : ''}`}
