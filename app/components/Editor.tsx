@@ -10,9 +10,14 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import Bold from '@tiptap/extension-bold';
 import Italic from '@tiptap/extension-italic';
 import Underline from '@tiptap/extension-underline';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import { addMemoToDB } from '../indexdb/indexedDBManager';
 
 export default function Editor() {
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isEmpty, setIsEmpty] = useState(true);
+  
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -41,15 +46,57 @@ export default function Editor() {
     ],
     content: undefined,
     immediatelyRender: false,
+    onUpdate: ({ editor }) => {
+      setIsEmpty(!editor.getText().trim());
+    },
   });
 
-  const isEmpty = !editor?.getText().trim();
   const outerDivRef = useRef<HTMLDivElement>(null);
 
   // 点击最外层 div 时让编辑器聚焦
   const handleOuterDivClick = useCallback(() => {
     editor?.chain().focus().run();
   }, [editor]);
+
+  // 处理发送按钮点击事件
+  const handleSendClick = async () => {
+    if (isEmpty || isSaving) return;
+    
+    try {
+      setIsSaving(true);
+      setSaveStatus('idle');
+      
+      // 获取编辑器内容
+      const content = editor?.getHTML() || '';
+      
+      // 保存到IndexDB
+      await addMemoToDB({
+        content,
+        // 其他字段会在addMemoToDB函数中设置默认值
+      });
+      
+      // 清空编辑器
+      editor?.commands.clearContent();
+      
+      // 设置保存成功状态
+      setSaveStatus('success');
+      
+      // 2秒后重置状态
+      setTimeout(() => {
+        setSaveStatus('idle');
+      }, 2000);
+    } catch (error) {
+      console.error('保存备忘录失败:', error);
+      setSaveStatus('error');
+      
+      // 2秒后重置状态
+      setTimeout(() => {
+        setSaveStatus('idle');
+      }, 2000);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <div
@@ -148,12 +195,15 @@ export default function Editor() {
         </div>
 
         <button
-          disabled={isEmpty}
+          disabled={isEmpty || isSaving}
           title="发送"
-          className={`rounded px-3 py-0 ${isEmpty ? 'bg-gray-300 text-white' : 'bg-green-500 text-white'
-            }`}
+          onClick={handleSendClick}
+          className={`rounded px-3 py-0 ${isEmpty || isSaving ? 'bg-gray-300 text-white' : 'bg-green-500 text-white hover:bg-green-600'}
+            ${saveStatus === 'success' ? 'bg-blue-500' : ''}
+            ${saveStatus === 'error' ? 'bg-red-500' : ''}
+            transition-colors duration-300`}
         >
-          ➤
+          {isSaving ? '...' : saveStatus === 'success' ? '✓' : saveStatus === 'error' ? '✗' : '➤'}
         </button>
       </div>
     </div>

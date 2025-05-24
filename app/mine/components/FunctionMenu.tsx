@@ -15,7 +15,6 @@ type SidebarMenuItem = {
 
 export default function FunctionMenu({ tags }: { tags: Tags }) {
   const [isWebDAVModalOpen, setIsWebDAVModalOpen] = useState(false);
-  const [isWebDAVSyncModalOpen, setIsWebDAVSyncModalOpen] = useState(false);
   const [webDAVModalType, setWebDAVModalType] = useState<'browser' | 'sync'>('browser');
 
   // 打开WebDAV浏览器

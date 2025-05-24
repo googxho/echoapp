@@ -2,8 +2,8 @@
  * @Auther: googxho
  * @Date: 2025-05-21 23:20:00
  * @LastEditors: googxho gxh522@qq.com
- * @LastEditTime: 2025-05-21 23:46:27
- * @FilePath: /echoapp/app/components/HomeLayout.tsx
+ * @LastEditTime: 2025-05-24 16:37:06
+ * @FilePath: \echoapp\app\components\HomeLayout.tsx
  * @Description: 主页布局组件
  */
 'use client';
@@ -15,14 +15,23 @@ interface HomeLayoutProps {
   leftSidebar: React.ReactNode;
   noteHeader: React.ReactNode;
   noteList: React.ReactNode;
+  onScrollEnd?: () => void; // 新增：滚动到底部时的回调函数
+  isLoading?: boolean; // 新增：是否正在加载更多数据
 }
 
-export default function HomeLayout({ leftSidebar, noteHeader, noteList }: HomeLayoutProps) {
+export default function HomeLayout({
+  leftSidebar,
+  noteHeader,
+  noteList,
+  onScrollEnd,
+  isLoading = false
+}: HomeLayoutProps) {
   // 左侧栏初始宽度
   const [leftWidth, setLeftWidth] = useState(260);
   const [isDragging, setIsDragging] = useState(false);
   const dragHandleRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const noteListRef = useRef<HTMLDivElement>(null);
 
   // 处理拖拽调整宽度
   useEffect(() => {
@@ -67,6 +76,17 @@ export default function HomeLayout({ leftSidebar, noteHeader, noteList }: HomeLa
     };
   }, [isDragging]);
 
+  // 处理滚动到底部加载更多数据
+  const handleScroll = () => {
+    if (!noteListRef.current || !onScrollEnd || isLoading) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = noteListRef.current;
+    // 当滚动到距离底部20px以内时，触发加载更多
+    if (scrollHeight - scrollTop - clientHeight < 20) {
+      onScrollEnd();
+    }
+  };
+
   return (
     <div className="flex justify-center h-screen overflow-hidden bg-[#fafafa]">
       <div
@@ -102,8 +122,10 @@ export default function HomeLayout({ leftSidebar, noteHeader, noteList }: HomeLa
 
               {/* 笔记列表区域 - 可滚动 */}
               <div
+                ref={noteListRef}
                 className="flex-grow overflow-y-auto"
                 style={{ width: '100%', boxSizing: 'border-box' }}
+                onScroll={handleScroll}
                 onMouseEnter={e => {
                   e.currentTarget.classList.remove('scrollbar-hide')
                   e.currentTarget.classList.add('custom-scrollbar')
@@ -117,6 +139,22 @@ export default function HomeLayout({ leftSidebar, noteHeader, noteList }: HomeLa
                 }}
               >
                 {noteList}
+
+                {/* 加载更多指示器 */}
+                {isLoading
+                  ? (
+                    <div className="flex justify-center items-center py-4">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-500"></div>
+                      <span className="ml-2 text-gray-500">加载中...</span>
+                    </div>
+                  )
+                  : (
+                    // 已经加载完所有数据
+                    <div className="flex justify-center items-center py-4 text-gray-500">
+                      <span>已加载全部笔记</span>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>

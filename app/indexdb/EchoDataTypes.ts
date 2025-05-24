@@ -63,7 +63,7 @@ export type EchoData = {
   files: FileItem[];
   history: HistoryItem[];
   links: LinkItem[];
-  memo_actions: [];
+  memo_actions: never[];
   memo_content_histories: MemoContentHistory[];
   memos: MemoItem[];
   tagInfos: [];

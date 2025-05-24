@@ -40,7 +40,7 @@ export default function WebDAVBrowser() {
     };
     
     checkConfig();
-  }, []);
+  }, [currentPath]);
   
   // 加载目录内容
   const loadFiles = async (path: string) => {

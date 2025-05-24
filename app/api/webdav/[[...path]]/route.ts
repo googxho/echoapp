@@ -1,95 +1,67 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'
 
-/**
- * WebDAV代理处理函数
- * 将请求转发到坚果云WebDAV服务器，解决CORS问题
- */
-export async function GET(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function GET(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
-
-export async function POST(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function POST(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
-
-export async function PUT(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function PUT(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
-
-export async function DELETE(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function DELETE(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
-
-export async function PROPFIND(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function HEAD(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
-
-export async function MKCOL(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
-}
-
-export async function COPY(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
-}
-
-export async function MOVE(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
-}
-
-export async function LOCK(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
-}
-
-export async function UNLOCK(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
-}
-
-export async function PROPPATCH(request: NextRequest, { params }: { params: { path: string[] } }) {
-  return handleWebDAVRequest(request, { params });
+export async function OPTIONS(request: NextRequest, context: never) {
+  return handleWebDAVRequest(request, context)
 }
 
 /**
- * 处理WebDAV请求并转发到坚果云服务器
+ * 代理请求到坚果云 WebDAV
  */
-async function handleWebDAVRequest(request: NextRequest, { params }: { params: { path: string[] } }) {
+async function handleWebDAVRequest(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+): Promise<NextResponse> {
   try {
-    // 构建目标URL
-    const pathSegments = params.path || [];
-    const targetPath = pathSegments.join('/');
-    const targetUrl = `https://dav.jianguoyun.com/dav/${targetPath}`;
+    const pathSegments = params?.path || []
+    const targetPath = pathSegments.join('/')
+    const targetUrl = `https://dav.jianguoyun.com/dav/${targetPath}`
 
-    // 获取原始请求的头部和认证信息
-    const headers = new Headers(request.headers);
+    const headers = new Headers(request.headers)
+    headers.set(
+      'Authorization',
+      'Basic ' +
+        Buffer.from(`${process.env.WEBDAV_USER}:${process.env.WEBDAV_PASS}`).toString('base64')
+    )
 
-    // 移除一些可能导致问题的头部
-    headers.delete('host');
+    headers.delete('host')
 
-    // 创建转发请求
-    const forwardRequest = new Request(targetUrl, {
+    const body =
+      request.method !== 'GET' && request.method !== 'HEAD'
+        ? await request.blob()
+        : undefined
+
+    const res = await fetch(targetUrl, {
       method: request.method,
-      headers: headers,
-      body: request.method !== 'GET' && request.method !== 'HEAD' ? await request.blob() : undefined,
+      headers,
+      body,
       redirect: 'follow',
-    });
+    })
 
-    // 发送请求到目标服务器
-    const response = await fetch(forwardRequest);
+    const resHeaders = new Headers(res.headers)
+    const resBlob = await res.blob()
 
-    // 创建响应
-    const responseHeaders = new Headers(response.headers);
-    const responseData = await response.blob();
-
-    // 返回响应
-    return new NextResponse(responseData, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: responseHeaders,
-    });
-  } catch (error) {
-    console.error('WebDAV代理请求失败:', error);
-    return NextResponse.json(
-      { error: '代理请求失败' },
-      { status: 500 }
-    );
+    return new NextResponse(resBlob, {
+      status: res.status,
+      statusText: res.statusText,
+      headers: resHeaders,
+    })
+  } catch (err: unknown) {
+    console.error('WebDAV代理请求失败:', err)
+    return NextResponse.json({ error: 'WebDAV 代理失败' }, { status: 500 })
   }
 }

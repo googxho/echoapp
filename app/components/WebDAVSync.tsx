@@ -122,6 +122,7 @@ export default function WebDAVSync({ onClose }: WebDAVSyncProps) {
   // 处理选择数据项
   const handleSelectItem = (id: number) => {
     const { selected, setSelected } = getCurrentData();
+    console.log("[ku]log >> :125 >> handleSelectItem >> selected:", selected);
     setSelected(prev => {
       if (prev.includes(id)) {
         return prev.filter(itemId => itemId !== id);
@@ -142,7 +143,7 @@ export default function WebDAVSync({ onClose }: WebDAVSyncProps) {
   };
 
   // 将数据转换为JSON字符串
-  const convertDataToJson = (data: any[]): string => {
+  const convertDataToJson = (data: unknown[]): string => {
     return JSON.stringify(data, null, 2);
   };
 
@@ -268,7 +269,7 @@ ${memo.content}`;
   };
 
   // 渲染数据项
-  const renderDataItem = (item: any) => {
+  const renderDataItem = (item: unknown) => {
     switch (currentDataType) {
       case 'memos':
         return renderMemoItem(item as MemoItem);
