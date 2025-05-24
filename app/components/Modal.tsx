@@ -60,7 +60,7 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
         }
       }}
     >
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-144 mx-4 overflow-hidden">
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-medium">{title || '提示'}</h3>
           <button 
