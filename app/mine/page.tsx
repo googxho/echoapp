@@ -105,7 +105,7 @@ export default function HomePage() {
           <FunctionMenu tags={tags} />
         </div>
       }
-      noteHeader={<NoteHeader />}
+      noteHeader={<NoteHeader onMemoUpdated={handleMemoUpdated} />}
       noteList={<MemoItemView memos={memos} onMemoUpdated={handleMemoUpdated} />}
       onScrollEnd={handleLoadMore}
       isLoading={isLoading}

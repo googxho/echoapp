@@ -13,11 +13,11 @@ import Underline from '@tiptap/extension-underline';
 import { useCallback, useRef, useState } from 'react';
 import { addMemoToDB } from '../indexdb/indexedDBManager';
 
-export default function Editor() {
+export default function Editor({onMemoUpdated}: {onMemoUpdated: () => void}) {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isEmpty, setIsEmpty] = useState(true);
-  
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -61,38 +61,36 @@ export default function Editor() {
   // 处理发送按钮点击事件
   const handleSendClick = async () => {
     if (isEmpty || isSaving) return;
-    
+
     try {
       setIsSaving(true);
       setSaveStatus('idle');
-      
+
       // 获取编辑器内容
       const content = editor?.getHTML() || '';
-      
+
       // 保存到IndexDB
       await addMemoToDB({
         content,
         // 其他字段会在addMemoToDB函数中设置默认值
       });
       
+      // 更新备忘录列表
+      onMemoUpdated();
       // 清空编辑器
       editor?.commands.clearContent();
-      
+
       // 设置保存成功状态
       setSaveStatus('success');
-      
-      // 2秒后重置状态
-      setTimeout(() => {
-        setSaveStatus('idle');
-      }, 2000);
+
+      //重置状态
+      setSaveStatus('idle');
     } catch (error) {
       console.error('保存备忘录失败:', error);
       setSaveStatus('error');
-      
-      // 2秒后重置状态
-      setTimeout(() => {
-        setSaveStatus('idle');
-      }, 2000);
+
+      // 重置状态
+      setSaveStatus('idle');
     } finally {
       setIsSaving(false);
     }
@@ -126,7 +124,7 @@ export default function Editor() {
               editor?.chain().focus().setImage({ src: '/window.svg' }).run()
             }
           >Q
-            </button>
+          </button>
           <button
             title="一级标题"
             onClick={() =>

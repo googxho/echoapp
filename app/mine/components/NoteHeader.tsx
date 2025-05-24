@@ -6,7 +6,7 @@ const Editor = dynamic(() => import('@/app/components/Editor'), {
   ssr: false, // 👈 禁用服务端渲染
 });
 
-export default function NoteHeader() {
+export default function NoteHeader({onMemoUpdated}: {onMemoUpdated: () => void}) {
 
   return (
     <div className="border-none">
@@ -20,7 +20,7 @@ export default function NoteHeader() {
         </div>
       </div>
       <div className="m-2">
-        <Editor />
+        <Editor onMemoUpdated={onMemoUpdated}/>
       </div>
     </div>
   );
