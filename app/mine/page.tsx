@@ -27,7 +27,7 @@ export default function HomePage() {
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [totalMemos, setTotalMemos] = useState(0);
-  const PAGE_SIZE = 150; // 每页加载50条数据
+  const PAGE_SIZE = 10; // 每页加载10条数据
   console.log("[ku]log >> :30 >> HomePage >> totalMemos:", totalMemos);
 
   // 加载备忘录数据（分页）
